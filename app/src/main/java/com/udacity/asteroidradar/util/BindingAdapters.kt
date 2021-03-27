@@ -22,6 +22,13 @@ fun ProgressBar.bindLoadingState(responseState: ResultData<*>?) {
     }
 }
 
+@BindingAdapter("android:contentDescription")
+fun ImageView.bindContentDescription(isHazardous: Boolean) {
+    this.contentDescription =
+        if (isHazardous) resources.getString(R.string.hazardous_text)
+        else resources.getString(R.string.not_hazardous_text)
+}
+
 @BindingAdapter("pictureOfDay")
 fun ImageView.bindPictureOfDay(url: String?) {
     Glide.with(this)

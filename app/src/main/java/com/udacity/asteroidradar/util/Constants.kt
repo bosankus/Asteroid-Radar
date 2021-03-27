@@ -8,6 +8,7 @@ object Constants {
     const val PICTURE_DATABASE_NAME = "picture_database"
     const val WORK_TAG = "asteroid_worker"
     const val SHARED_PREFERENCE_NAME = "asteroid_preference"
+    const val FIRST_LAUNCH = "first_launch"
     const val IMAGE_MEDIA = "image"
 
     // Asteroid sorting

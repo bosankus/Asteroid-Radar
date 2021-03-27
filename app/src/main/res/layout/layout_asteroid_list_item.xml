@@ -14,7 +14,7 @@
         android:id="@+id/layout_asteroid_item_cl_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/gap_10dp"
         android:background="@color/colorPrimary">
 
         <TextView
@@ -46,11 +46,11 @@
             android:id="@+id/layout_asteroid_item_img_potentiallyHazardous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@{asteroid.potentiallyHazardous}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:statusIcon="@{asteroid.potentiallyHazardous}"
-            tools:ignore="ContentDescription" />
+            app:statusIcon="@{asteroid.potentiallyHazardous}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -4,7 +4,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.udacity.asteroidradar.data.room.AsteroidEntity
 import com.udacity.asteroidradar.databinding.LayoutAsteroidListItemBinding
-import com.udacity.asteroidradar.model.Asteroid
 import com.udacity.asteroidradar.view.main.MainFragmentDirections
 
 /**Created by

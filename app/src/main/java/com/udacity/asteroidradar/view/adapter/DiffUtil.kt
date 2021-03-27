@@ -2,7 +2,6 @@ package com.udacity.asteroidradar.view.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.udacity.asteroidradar.data.room.AsteroidEntity
-import com.udacity.asteroidradar.model.Asteroid
 
 /**Created by
 Author: Ankush Bose

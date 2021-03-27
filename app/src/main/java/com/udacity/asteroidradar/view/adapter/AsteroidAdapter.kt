@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.udacity.asteroidradar.data.room.AsteroidEntity
 import com.udacity.asteroidradar.databinding.LayoutAsteroidListItemBinding
-import com.udacity.asteroidradar.model.Asteroid
 
 /**Created by
 Author: Ankush Bose

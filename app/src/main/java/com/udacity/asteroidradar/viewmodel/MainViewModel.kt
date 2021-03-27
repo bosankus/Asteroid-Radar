@@ -1,11 +1,7 @@
 package com.udacity.asteroidradar.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.work.WorkInfo
-import androidx.work.WorkManager
+import androidx.lifecycle.*
+import androidx.work.*
 import com.udacity.asteroidradar.data.room.AsteroidEntity
 import com.udacity.asteroidradar.repository.MainRepository
 import com.udacity.asteroidradar.util.Constants.PAST
@@ -13,12 +9,15 @@ import com.udacity.asteroidradar.util.Constants.TODAY
 import com.udacity.asteroidradar.util.Constants.TODAY_ONWARD
 import com.udacity.asteroidradar.util.Constants.WORK_TAG
 import com.udacity.asteroidradar.util.ResultData
+import com.udacity.asteroidradar.worker.AsteroidWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val dataSource: MainRepository,
+    dataSource: MainRepository,
     private val workManager: WorkManager
 ) : ViewModel() {
 
@@ -42,9 +41,7 @@ class MainViewModel @Inject constructor(
 
     val picOfDay = dataSource.getPictureFromLocal()
 
-
     init {
-        startLoading()
 
         asteroidList.addSource(listOfTodayOnwardsAsteroids) { listOfAsteroids ->
             if (currentAsteroidList == TODAY_ONWARD) {
@@ -73,8 +70,28 @@ class MainViewModel @Inject constructor(
         }
     }.also { currentAsteroidList = order }
 
+    fun startWorker() {
+        viewModelScope.launch {
+            val workConstraints = Constraints.Builder()
+                .setRequiresCharging(true)
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build()
 
-    private fun startLoading() {
+            val request = PeriodicWorkRequestBuilder<AsteroidWorker>(24, TimeUnit.HOURS)
+                .setConstraints(workConstraints)
+                .addTag(WORK_TAG)
+                .setBackoffCriteria(
+                    BackoffPolicy.LINEAR,
+                    PeriodicWorkRequest.MIN_BACKOFF_MILLIS,
+                    TimeUnit.MILLISECONDS
+                ).build()
+
+            workManager
+                .enqueueUniquePeriodicWork("work_name", ExistingPeriodicWorkPolicy.KEEP, request)
+        }
+    }
+
+    fun startLoading() {
         _loadingState.value = ResultData.Loading
     }
 

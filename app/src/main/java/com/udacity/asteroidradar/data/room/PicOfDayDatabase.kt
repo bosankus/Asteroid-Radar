@@ -13,7 +13,7 @@ Date: 25,March,2021
     version = 1,
     exportSchema = false
 )
-abstract class PicOfDayDatabase: RoomDatabase() {
+abstract class PicOfDayDatabase : RoomDatabase() {
 
     abstract fun pictureDao(): PicOfDayDao
 }

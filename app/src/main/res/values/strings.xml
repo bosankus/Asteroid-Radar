@@ -20,4 +20,7 @@
     <string name="this_is_nasa_s_picture_of_day_showing_nothing_yet">This is NASA\'s picture of day, showing nothing yet</string>
     <string name="nasa_picture_of_day_content_description_format">NASA\'s picture of day: %s</string>
     <string name="empty_list_text">No data record saved yet</string>
+    <string name="not_hazardous_text">This asteroid is not hazardous</string>
+    <string name="hazardous_text">"This asteroid is hazardous"</string>
+    <string name="no_connectivity_message">No connection buddy! Would you like to turn on the internet?</string>
 </resources>
